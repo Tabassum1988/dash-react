@@ -1,218 +1,224 @@
-// import React, { Component } from "react";
-// // import { connect } from "react-redux";
-// import { Link } from "react-router-dom";
-// import "react-accessible-accordion/dist/fancy-example.css";
-// // import Loading from "../../components/Loader/loader";
-// // import FullCalendar from "@fullcalendar/react";
-// // import dayGridPlugin from "@fullcalendar/daygrid";
-// // import { calendarActions } from "../../redux/actions";
-// // import interactionPlugin from "@fullcalendar/interaction";
-// // import timeGridPlugin from "@fullcalendar/timegrid";
-// // import resourceTimeGridPlugin from "@fullcalendar/resource-timegrid";
-// import "@fullcalendar/core/main.css";
-// import "@fullcalendar/daygrid/main.css";
-// import moment from "moment";
-// // import Breadcrumb from "../../components/breadcrumb/breadcrumb";
-// // import EditModal from "../components/editModal";
-// // import { Dialog } from "@headlessui/react";
-// // import { InformationCircleIcon, PencilIcon, XIcon } from "@heroicons/react/outline";
+import React, { useState ,useEffect} from "react";
+import Sidebar from "../partials/Sidebar.jsx"
+import Header from "../partials/Header.jsx"
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 
-// function mapStateToProps(state) {
-//   const { calendarData } = state.CalendarReducer;
-//   return { calendarData };
-// }
 
-// class Calendar extends Component<any, any> {
-//   private calendarComponentRef;
+const Calendar = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
-//   constructor(props) {
-//     super(props);
-//     this.calendarComponentRef = React.createRef();
+  const [eventname, setEventname] = useState('');
+  const [date, setDate] = useState('');
+  const [time, setTime] = useState('');
+  const [batch, setBatch] = useState('');
+  const [description, setDescription] = useState('');
+  const [externallink,  setExternallink] = useState('');
+  const [redirectTo, setRedirectTo] = useState('');
+ 
 
-//     this.state = {
-//       loading: true,
-//       setOpen: false,
-//       eventDetails: {}
-//     };
-//   }
+  useEffect(()=>{toggleTab()},[])
 
-//   componentDidMount() {
-//     const { dispatch }: any = this.props;
+  const [toggleState, setToggleState] = useState(1);
 
-//     dispatch(
-//       calendarActions.get({
-//         feature: "calendar",
-//       })
-//     );
-//   }
+  const toggleTab = (index) => {
+    console.log(index);
+    return true
+  }
+  
+ 
 
-//   componentDidUpdate(prevProps, prevState, snapshot) {
-//     const { calendarData }: any = this.props;
-//     let arr: any = [];
-//     if (prevProps.calendarData !== calendarData) {
-//       if (calendarData?.data) {
-//         calendarData?.data?.map((ds) => {
-//           arr.push({
-//             id: ds._id,
-//             title: ds.displayName,
-//             date:
-//               moment(ds.date).format("YYYY-MM-DD") +
-//               " " +
-//               moment(
-//                 moment(ds.date).format("YYYY-MM-DD") + " " + ds.time
-//               ).format("HH:mm"),
-//             externalLink: ds.externalLink,
-//             description: ds.description
-//           });
-//         });
-//       }
+  const handleEventnameChange = (event) => {
+    setEventname(event.target.value);
+  };
 
-//       this.setState({
-//         calendarData: calendarData.data,
-//         totalCount: calendarData.totalCount,
-//         events: arr,
-//         loading: false,
-//       });
-//     }
-//   }
+  const handleDateChange = (event) => {
+    setDate(event.target.value);
+  };
 
-//   componentWillUnmount() {
-//     console.log("componentWillUnmount");
-//   }
+  const handleTimeChange = (event) => {
+    setTime(event.target.value);
+  };
 
-//   handleSelectedDates = (info) => {
-//     const title = prompt("What's the name of the title");
-//     if (title != null) {
-//       const newEvent = {
-//         title,
-//         start: info.startStr,
-//         end: info.endStr,
-//       };
-//       const data = [...this.state.events, newEvent];
-//       this.setState({ events: data });
-//     }
-//   };
+  const handleBatchChange = (event) => {
+    setBatch(event.target.value);
+  };
 
-//   onOpen(eventDetails) {
-//     console.log("eventDetails", eventDetails)
-//     this.setState({ setOpen: true, eventDetails })
-//   }
+  const handleDescriptionChange = (event) => {
+    setDescription(event.target.value);
+  };
 
-//   onClose() {
-//     this.setState({ setOpen: false })
-//   }
+  const handleExternallinkChange = (event) => {
+    setExternallink(event.target.value);
+  };
+ 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Process and save configuration data here
+  };
 
-//   render() {
-//     const { loading, setOpen, eventDetails }: any = this.state;
 
-//     return (
-//       <>
-//         {loading && <Loading />}
+  return (
 
-//         <div className="flex mt-20 md:mt-20 flex-wrap">
-//           <div className="w-full px-0 md:px-4 mb-12 xl:mb-0 h-screen">
-//             <Breadcrumb labels={[{ label: "Calendar", value: "/calendar" }]} />
+    <div>
+       <div className="flex h-screen overflow-hidden">
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
 
-//             <div className="bg-theme relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-white">
-//               <div className="rounded-t mb-0 px-2 md:px-4 py-3 bg-transparent">
-//                 <div className="flex flex-wrap items-center">
-//                   <div className="relative w-full max-w-full flex-grow flex-1">
-//                     <div className="flex justify-between">
-//                       <h2 className="text-xl">Calendar</h2>
-//                       <Link
-//                         to="/manageCalendar"
-//                         className="theme-color-text text-sm"
-//                       >
-//                         Manage
-//                       </Link>
-//                     </div>
+        {/* Content area */}
+        <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+          {/*  Site header */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          
+          {/* redirectTo && <Redirect to={{pathname: redirectTo }} /> */}
 
-//                     <hr />
+          <main>
+          <div className="container   w-full mb-0 px-2 md:px-4 py-3 max-w-full flex-grow flex-1  sm-auto ">
+      <form className=" lg:bg-white p-8 ">
+      <div className="md:flex space-x-2 sm:px-2 md:shrink-0 nav nav-pills mb-3 mt-1 " >
+        <div className="px-4 md:shrink-0 bg-blue-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg">
+          <button  className ={toggleState === 1 ? " tabs active-tabs ": "tabs"} onClick={() => toggleTab(1)} >
+           Calendar 
+            </button>
+            </div>
+            <div className="md:shrink-0 bg-blue-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg">
+              <button  className={toggleState === 2 ? " tabs active-tabs ": "tabs"} onClick={() => toggleTab(2)}>
+          Manage Calendar
+        </button></div>
+        </div>
+                   <br />
+                     {/* 
+                      manage calende code */}
 
-//                     <div className="w-full flex mt-4 font-serif">
-//                       <FullCalendar
-//                         schedulerLicenseKey="GPL-My-Project-Is-Open-Source"
-//                         ref={this.calendarComponentRef}
-//                         displayEventTime={true}
-//                         selectable={false}
-//                         plugins={[
-//                           dayGridPlugin,
-//                           interactionPlugin,
-//                           timeGridPlugin,
-//                           resourceTimeGridPlugin,
-//                         ]}
-//                         eventClick={(event) => {
-//                           let eventDetails = this.state.events.filter(
-//                             (ds) => ds.id === event.event._def.publicId
-//                           );
-//                           eventDetails = eventDetails[0];
-//                           this.onOpen(eventDetails)
-//                         }}
-//                         events={this.state.events}
-//                         select={this.handleSelectedDates}
-//                         eventLimit={3}
-//                       />
+  <div className={toggleState === 1 ? " manage active-manage ": "manage"}>
+        <h3 className="text-2xl font-semibold mb-4">Manage Calendar</h3>
+        <hr className="h-px my-2 border-solid dark:bg-gray-700"/>
+        <br />
+        <div className="md:flex space-x-4 sm:px-2 md:shrink-0">
+          <button className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg  ">
+           EVENT
+            </button>
+              <button className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg ">
+          ADD EVENT
+        </button>
+        </div>
+  <br />
+  <hr  text-xs="true"/>
+  <br />
 
-//                       {setOpen && (
-//                         <EditModal
-//                           setOpen={setOpen}
-//                           setClose={(e) => this.onClose()}
-//                           innerHtml={
-//                             <div className="fixed md:relative top-2 md:top-0 h-98% md:h-full w-3/5 overflow-auto md:overflow-hidden inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left shadow-xl transform transition-all sm:my-8 sm:align-middle sm:p-6">
-//                               <div className="sm:flex sm:items-start">
-//                                 <div className="w-full">
-//                                   <Dialog.Title
-//                                     as="h3"
-//                                     className="flex items-center gap-1 text-lg leading-6 font-medium text-gray-900"
-//                                   >
-//                                     <div className="flex items-center justify-center h-8 w-8 rounded-full bg-green-100 sm:mx-0">
-//                                       <InformationCircleIcon
-//                                         className="h-6 w-6 text-green-600"
-//                                         aria-hidden="true"
-//                                       />
-//                                     </div>
-//                                     Event Details
-//                                   </Dialog.Title>
-//                                   <hr />
+  < div className="flex-auto grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-1">
+          <div className=" flex-auto grid flex-grow mx-4 ">
+       <div className="mb-4  ">
+          <label htmlFor="eventname" className="block font-medium mb-2 text-xs sm:text-sm=true ">Event Name</label>
+          <input
+            type="text"
+            id="eventname"
+            value={eventname}
+            onChange={handleEventnameChange}
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+          />
+        </div> </div>
+        <div className="mb-4  ">
+          <label htmlFor="date" className="block font-medium mb-2 text-xs sm:text-sm=true ">Date</label>
+          <input
+            type="date"
+            id="date"
+            value={date}
+            onChange={handleDateChange}
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+          />
+        </div>
+        <div className="mb-4 ">
+          <label htmlFor="time" className="block font-medium mb-2 text-xs sm:text-sm=true">Time</label>
+          <input
+            type="time"
+            id="time"
+            value={time}
+            onChange={handleTimeChange}
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+          />
+        </div> 
+        <div className="mb-4  ">
+          <label htmlFor="batch" className="block font-medium mb-2 text-xs sm:text-sm=true">Batch</label>
+          <input
+            type="text"
+            id="batch"
+            value={batch}
+            onChange={ handleBatchChange}
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+          />
+        </div>
+        
 
-//                                   <div className="mt-4">
-//                                     <div className="p-2 col-start-1 col-span-8 md:col-start-2 md:col-span-6 border rounded border-blue-600 bg-blue-50">
-//                                       <ul>
-//                                         <li>
-//                                           <span className="italic font-semibold">Event Name </span> - {eventDetails.title}
-//                                         </li>
-//                                         <li className="mt-2">
-//                                           <span className="italic font-semibold">  Date/Time</span> - {eventDetails.date}
-//                                         </li>
-//                                         <li className="mt-2">
-//                                           <span className="italic font-semibold">  Description </span> - {eventDetails.description}
-//                                         </li>
-//                                         <li className="mt-2 flex">
-//                                           <span className="italic font-semibold">  URL</span> - <a target="_blank" className="text-blue-500" href={eventDetails.externalLink}>{eventDetails.externalLink}</a>
-//                                         </li>
-//                                       </ul>
-//                                     </div>
-//                                   </div>
-//                                 </div>
-//                               </div>
-//                             </div>
-//                           }
-//                         />
-//                       )}
-//                     </div>
-//                   </div>
-//                 </div>
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </>
-//     );
-//   }
-// }
+        <div className="mb-4">
+          <label htmlFor="description" className="block font-medium mb-2 text-xs sm:text-sm=true">Description</label>
+          <input
+            type="text"
+            id="description"
+            value={description}
+            onChange={handleDescriptionChange}
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+          />
+        </div>
+        <div className="mb-4">
+          <label htmlFor="externallink" className="block font-medium mb-2 text-xs sm:text-sm=true">External Link</label>
+          <input
+            type="text"
+            id="externallink"
+            value={externallink}
+            onChange={handleExternallinkChange}
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+          />
+        </div>
+         </div>
+        <div className='flex  justify-center gap-4 relative '>
+        <button 
+          type="add"
+          className="inline-block rounded bg-blue-600 px-7 pb-2.5 pt-3 text-sm hover:bg-white hover:text-blue-600 font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+        >
+          Add
+        </button> 
+       
+     
+        <button
+          type="cancel"
+          className="bg-red-500 hover:bg-blue-600 text-white px-4 py-2 rounded "
+        >
+          Cancel
+        </button>
+        </div>
+        <br />
+        </div>
+        </form>
+    </div>
+    </main>
+    </div></div>
 
-// const CalendarComponent = connect(mapStateToProps, null, null, { pure: false })(
-//   Calendar
-// );
 
-// export default CalendarComponent;
+
+
+
+
+
+                     {/* calender code */}
+
+    {/* <div className={toggleState === 2 ? " calendar active-calendar ": "calendar"}>
+                            <h1>hiii</h1>
+                     </div> */}
+ <div className={toggleState === 2 ? " calendar active-calendar ": "calendar"}>
+ function StaticDatePickerLandscape() {
+
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <StaticDatePicker orientation="landscape" />
+    </LocalizationProvider>
+  
+}
+</div>   
+    
+    
+    </div>
+);
+}
+
+export default Calendar ;

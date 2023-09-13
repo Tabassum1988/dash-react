@@ -1,6 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
+import Sidebar from "../partials/Sidebar.jsx"
+
+import Header from "../partials/Header.jsx"
+
 
 const Configuration = () => {
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+
+
+
   const [organization, setOrganization] = useState('');
   const [email, setEmail] = useState('');
   const [contact, setContact] = useState('');
@@ -49,131 +59,163 @@ const Configuration = () => {
     setAss(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleOrganization = (event) => {
     event.preventDefault();
     // Process and save configuration data here
   };
 
+
+  function openNewPage() {
+    // Create a new blank page or an empty HTML page
+    const newPage = window.open('', '_blank');
+    
+    // You can add content to the new page using newPage.document.write()
+    newPage.document.write('hiiiii ');
+    
+    
+    
+    
+   
+    
+    // Close the document to ensure it's properly rendered
+    newPage.document.close();
+  }
+  
+
   return (
-    <div className="container mx-auto p-6">
-      <form onSubmit={handleSubmit} className="bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-2xl font-semibold mb-4">Configurations</h2>
-        <hr />
+              
+    <div className="flex h-screen overflow-hidden">
+        {/* Sidebar */}
+        <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+        {/* Content area */}
+        <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+          {/*  Site header */}
+          <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+
+
+<main>
+
+    <div className="container   w-full mb-0 px-2 md:px-4 py-3 max-w-full flex-grow flex-1  sm-auto ">
+      <form className=" lg:bg-white p-8 ">
+        <h3 className="text-2xl font-semibold mb-4">Configurations</h3>
+        <hr className="h-px my-2 border-solid dark:bg-gray-700"/>
         <br />
-        <div class="flex space-x-4 ">
-          <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+        <div className="md:flex space-x-4 sm:px-2 md:shrink-0">
+          <button onClick={handleOrganization} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg ">
            ORGANIZATIONS
             </button>
-              <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+              <button onClick={openNewPage} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg ">
           SIDEBAR
         </button>
-         <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+         <button  onClick={openNewPage} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
               PAGES
          </button>
-                <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+                <button  onClick={openNewPage} className="  md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
        TABS
          </button>
-       <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+       <button  onClick={openNewPage} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
               ACTIVITIES
          </button>
-          <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+          <button  onClick={openNewPage} className=" md:shrink-0 bg-white-500 :hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
           ROLES
            </button>
-          <button class="bg-white-500 hover:bg-blue-600 text-black font-semibold py-2 px-4 rounded">
+          <button  onClick={openNewPage} className="  md:shrink-0 bg-white-500 :hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg  ">
          CONTROL PANEL
     </button>
   </div>
   <br />
-  <hr />
+  <hr text-xs="true"/>
   <br />
-<div className='design mr-4 flex items-center gap-4 '>
-
-        <div className="mb-4  ">
-          <label htmlFor="OrganizationName" className="block font-medium mb-2 ">Organization Name</label>
+  < div className="flex-auto grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-1">
+          <div className=" flex-auto grid flex-grow">
+       <div className="mb-4 mr-4 ">
+          <label htmlFor="OrganizationName" className="block font-medium mb-2 text-xs sm:text-sm=true ">Organization Name</label>
           <input
             type="text"
             id="organization"
             value={organization}
             onChange={handleOrganizationChange}
-            className=" border rounded-md p-2 md:p-3"
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
-        </div>
-        <div className="mb-4 ">
-          <label htmlFor="email" className="block font-medium mb-2 ">Email</label>
+        </div> </div>
+        <div className="mb-4 mr-4">
+          <label htmlFor="email" className="block font-medium mb-2 text-xs sm:text-sm=true ">Email</label>
           <input
             type="email"
             id="email"
             value={email}
             onChange={handleEmailChange}
-            className=" border rounded-md p-2 md:p-3"
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="contactno" className="block font-medium mb-2">Contact No</label>
+        <div className="mb-4 mr-4">
+          <label htmlFor="contactno" className="block font-medium mb-2 text-xs sm:text-sm=true">Contact No</label>
           <input
             type="Number"
             id="contact"
             value={contact}
             onChange={handleContactChange}
-            className=" border rounded-md p-2 md:p-3 "
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div> 
-        <div className="mb-4  ">
-          <label htmlFor="logo" className="block font-medium mb-2 ">Logo</label>
+        <div className="mb-4 mr-4 ">
+          <label htmlFor="logo" className="block font-medium mb-2 text-xs sm:text-sm=true">Logo</label>
           <input
             type="file"
             id="logo"
             value={logo}
             onChange={handleLogoChange}
-            className=" border rounded-md p-2 md:p-3"
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div>
-        </div>
+        {/* </div> */}
 
-        <div className='flex items-center  gap-4'>
+        {/* <div className='flex items-center  gap-4 sm:px-2'> */}
 
-        <div className="mb-4">
-          <label htmlFor="address" className="block font-medium mb-2">Address</label>
+        <div className="mb-4 mr-4">
+          <label htmlFor="address" className="block font-medium mb-2 text-xs sm:text-sm=true">Address</label>
           <input
             type="text"
             id="address"
             value={address}
             onChange={handleAddressChange}
-            className=" border rounded-md p-2 md:p-3"
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="gstno" className="block font-medium mb-2">GST No.</label>
+        <div className="mb-4 mr-4">
+          <label htmlFor="gstno" className="block font-medium mb-2 text-xs sm:text-sm=true">GST No.</label>
           <input
             type="number"
             id="gst"
             value={gst}
             onChange={handleGSTChange}
-            className=" border rounded-md p-2 md:p-3"
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div>
-        <div className="mb-4">
-          <label htmlFor="tin" className="block font-medium mb-2">TIN</label>
+        <div className="mb-4 mr-4">
+          <label htmlFor="tin" className="block font-medium mb-2 text-xs sm:text-sm=true">TIN</label>
           <input
             type="text"
             id="tin"
             value={tin}
             onChange={handleTINChange}
-            className=" border rounded-md p-2 md:p-3"
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div>
-        <div className="mb-4  ">
+        <div className="mb-4 mr-4 ">
           <label htmlFor="description" className="block font-medium mb-2 ">Description</label>
           <input
             type="text"
             id="description"
             value={description}
             onChange={handleDescriptionChange}
-            className=" border rounded-md p-2 md:p-3"
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
         </div>
-        </div>
-        <div className="mb-4">
+       
+        {/* </div> */}
+        <div className="mb-4 mr-2 ">
           <label  htmlFor="ass"  className="block font-medium mb-2 ">ASS</label>
           <input
             type="text"
@@ -181,15 +223,14 @@ const Configuration = () => {
             value={ass}
           
             onChange={handleASSChange}
-            className="mr-2"
+            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
           />
          
-        </div>
-
+        </div> </div>
         <div className='flex  justify-center gap-4 relative  '>
         <button 
           type="submit"
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded "
+          className="inline-block rounded bg-blue-600 px-7 pb-2.5 pt-3 text-sm hover:bg-white hover:text-blue-600 font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
         >
           Add
         </button> 
@@ -208,13 +249,13 @@ const Configuration = () => {
       
 
                       {/* /table code */}
-<body class="bg-gray-100">
-  <div class="container mx-auto p-6">
-    <table class="min-w-full bg-white border">
+<body class="bg-gray-100   table-auto mt-2 flex flex-col ">
+  <div class="container table-auto p-6 -my-2 overflow-x-auto -mx-4 sm:-mx-6 lg:-mx-8 ">
+    <table class="min-w-full bg-white border  divide-y ">
       <thead>
         <tr class="bg-gray-200">
           <th class="border px-4 py-2">ORGANIZATION NAME</th>
-          <th class="border px-4 py-2">EMAI</th>
+          <th class="border px-4 py-2">EMAIL</th>
           <th class="border px-4 py-2">CONTACT NO</th>
           <th class="border px-4 py-2">LOGO</th>
           <th class="border px-4 py-2">ADDRESS</th>
@@ -245,13 +286,37 @@ const Configuration = () => {
 </body>
 
 
-        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 
       </form>
-    </div>
+    </div></main>
+    </div></div>
+    
   );
 };
 

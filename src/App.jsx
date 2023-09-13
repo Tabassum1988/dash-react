@@ -12,6 +12,9 @@ import './charts/ChartjsConfig';
 // Import pages
 import Dashboard from './pages/Dashboard';
 import Configuration from '../src/students/Configuration';
+import Ranking from '../src/students/Ranking';
+import Calendar from '../src/students/Calendar';
+import Results from '../src/students/Results';
 function App() {
 
   const location = useLocation();
@@ -26,8 +29,10 @@ function App() {
     <>
       <Routes>
         <Route exact path="/" element={< Dashboard />} />
-        <Route exact path="Configuration" element={<Configuration/>} />
-        
+        <Route path="configuration" element={<Configuration/>} />
+        <Route path="ranking" element={<Ranking/>} />
+        <Route path="calendar" element={<Calendar/>} />
+        <Route path="results" element={<Results/>} />
         
       </Routes>
     </>
