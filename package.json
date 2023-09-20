@@ -1,10 +1,11 @@
 {
-  "homepage": "https://<Tabassum1988>.github.io/<Dashtext>",
+  "homepage": "https://Tabassum1988.github.io/DashText",
   "name": "asyncron-ed-pro",
   "version": "0.0.1",
+  "private": "true",
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build" ,
+    "deploy": "gh-pages -d build",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
