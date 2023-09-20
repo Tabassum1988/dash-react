@@ -4,8 +4,8 @@ import Header from "../partials/Header.jsx"
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
-
-
+import { TEInput, TERipple } from "tw-elements-react";
+import './Calendar.css'
 const Calendar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -18,16 +18,21 @@ const Calendar = () => {
   const [redirectTo, setRedirectTo] = useState('');
  
 
-  useEffect(()=>{toggleTab()},[])
+  // useEffect(()=>{toggleTab()},[])
 
-  const [toggleState, setToggleState] = useState(1);
+  const [toggle, setToggle] = useState(1);
 
-  const toggleTab = (index) => {
-    console.log(index);
-    return true
-  }
+//   const toggleTab = (index) => {
+//   //     //setToggleState(index);
+//    console.log(index);
+//    return true
+//  }
   
- 
+function updateToggle(id) {
+setToggle(id)
+
+}
+  
 
   const handleEventnameChange = (event) => {
     setEventname(event.target.value);
@@ -76,23 +81,27 @@ const Calendar = () => {
           <main>
           <div className="container   w-full mb-0 px-2 md:px-4 py-3 max-w-full flex-grow flex-1  sm-auto ">
       <form className=" lg:bg-white p-8 ">
-      <div className="md:flex space-x-2 sm:px-2 md:shrink-0 nav nav-pills mb-3 mt-1 " >
-        <div className="px-4 md:shrink-0 bg-blue-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg">
-          <button  className ={toggleState === 1 ? " tabs active-tabs ": "tabs"} onClick={() => toggleTab(1)} >
+       <div className="md:flex space-x-2 sm:px-2 md:shrink-0 nav nav-pills mb-3 mt-1 " >
+        {/* <div className="px-4 md:shrink-0 bg-blue-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg">
+          <button  className ={toggleState === 1 ? " tabs active-tabs ": "tabs"}  >
            Calendar 
             </button>
-            </div>
-            <div className="md:shrink-0 bg-blue-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg">
-              <button  className={toggleState === 2 ? " tabs active-tabs ": "tabs"} onClick={() => toggleTab(2)}>
+            </div> */}
+            {/* <div className="md:shrink-0 bg-blue-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg">
+              <button  className={toggleState === 2 ? " tabs active-tabs ": "tabs"} >
           Manage Calendar
-        </button></div>
+        </button></div>  */}
+        <ul className="flex ">
+          <li className="flex-fill  bg-blue-400 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4  " onClick={()=>updateToggle(1)}>Manage Calendar</li> 
+          <li className="flex-fill  bg-blue-400 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 pace-x-5" onClick={()=>updateToggle(2)}>Calendar</li>
+        </ul>
         </div>
                    <br />
                      {/* 
                       manage calende code */}
 
-  <div className={toggleState === 1 ? " manage active-manage ": "manage"}>
-        <h3 className="text-2xl font-semibold mb-4">Manage Calendar</h3>
+  <div className={toggle === 1 ? " show-content ": "content"}>
+        <h3 className="text-2xl font-semibold mb-4 ">Manage Calendar</h3>
         <hr className="h-px my-2 border-solid dark:bg-gray-700"/>
         <br />
         <div className="md:flex space-x-4 sm:px-2 md:shrink-0">
@@ -111,64 +120,82 @@ const Calendar = () => {
           <div className=" flex-auto grid flex-grow mx-4 ">
        <div className="mb-4  ">
           <label htmlFor="eventname" className="block font-medium mb-2 text-xs sm:text-sm=true ">Event Name</label>
-          <input
+          <TEInput
+             tabIndex={1}
             type="text"
             id="eventname"
             value={eventname}
             onChange={handleEventnameChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div> </div>
         <div className="mb-4  ">
           <label htmlFor="date" className="block font-medium mb-2 text-xs sm:text-sm=true ">Date</label>
-          <input
+          <TEInput
+             tabIndex={2}
             type="date"
             id="date"
             value={date}
             onChange={handleDateChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         <div className="mb-4 ">
           <label htmlFor="time" className="block font-medium mb-2 text-xs sm:text-sm=true">Time</label>
-          <input
+          <TEInput
+             tabIndex={3}
             type="time"
             id="time"
             value={time}
             onChange={handleTimeChange}
             className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div> 
         <div className="mb-4  ">
           <label htmlFor="batch" className="block font-medium mb-2 text-xs sm:text-sm=true">Batch</label>
-          <input
+          <TEInput
+             tabIndex={4}
             type="text"
             id="batch"
             value={batch}
             onChange={ handleBatchChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         
 
         <div className="mb-4">
           <label htmlFor="description" className="block font-medium mb-2 text-xs sm:text-sm=true">Description</label>
-          <input
+          <TEInput
+             tabIndex={5}
             type="text"
             id="description"
             value={description}
             onChange={handleDescriptionChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         <div className="mb-4">
           <label htmlFor="externallink" className="block font-medium mb-2 text-xs sm:text-sm=true">External Link</label>
-          <input
+          <TEInput
+             tabIndex={6}
             type="text"
             id="externallink"
             value={externallink}
             onChange={handleExternallinkChange}
-            className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+                              autoComplete="none"
+                              required
           />
         </div>
          </div>
@@ -192,32 +219,23 @@ const Calendar = () => {
         </div>
         </form>
     </div>
+    
     </main>
-    </div></div>
 
+                  {/* calender code */}
 
-
-
-
-
-
-                     {/* calender code */}
-
-    {/* <div className={toggleState === 2 ? " calendar active-calendar ": "calendar"}>
-                            <h1>hiii</h1>
-                     </div> */}
- <div className={toggleState === 2 ? " calendar active-calendar ": "calendar"}>
- function StaticDatePickerLandscape() {
-
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <StaticDatePicker orientation="landscape" />
-    </LocalizationProvider>
+ <div className={toggle === 2 ? " show-content ": "content"}>
   
-}
+     
+  <LocalizationProvider dateAdapter={AdapterDayjs}> 
+      <StaticDatePicker orientation="landscape" /> 
+    </LocalizationProvider>   
+
+
+
 </div>   
-    
-    
-    </div>
+    </div>  
+    </div></div>
 );
 }
 

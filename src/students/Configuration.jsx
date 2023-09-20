@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Sidebar from "../partials/Sidebar.jsx"
+import { TEInput, TERipple } from "tw-elements-react";
 
 import Header from "../partials/Header.jsx"
 
@@ -102,25 +103,25 @@ const Configuration = () => {
         <hr className="h-px my-2 border-solid dark:bg-gray-700"/>
         <br />
         <div className="md:flex space-x-4 sm:px-2 md:shrink-0">
-          <button onClick={handleOrganization} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg ">
+          <button onClick={handleOrganization} variant="contained" className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg ">
            ORGANIZATIONS
             </button>
-              <button onClick={openNewPage} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg ">
+              <button onClick={openNewPage} variant="contained" className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg ">
           SIDEBAR
         </button>
-         <button  onClick={openNewPage} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
+         <button  onClick={openNewPage} variant="contained" className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
               PAGES
          </button>
-                <button  onClick={openNewPage} className="  md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
+                <button  onClick={openNewPage} variant="contained" className="  md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
        TABS
          </button>
-       <button  onClick={openNewPage} className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
+       <button  onClick={openNewPage} variant="contained" className=" md:shrink-0 bg-white-500 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
               ACTIVITIES
          </button>
-          <button  onClick={openNewPage} className=" md:shrink-0 bg-white-500 :hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
+          <button  onClick={openNewPage} variant="contained" className=" md:shrink-0 bg-white-500 :hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 px-4 rounded-s-lg  ">
           ROLES
            </button>
-          <button  onClick={openNewPage} className="  md:shrink-0 bg-white-500 :hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg  ">
+          <button  onClick={openNewPage} variant="contained" className="  md:shrink-0 bg-white-500 :hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 rounded-s-lg  ">
          CONTROL PANEL
     </button>
   </div>
@@ -129,44 +130,56 @@ const Configuration = () => {
   <br />
   < div className="flex-auto grid md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-4 mt-1">
           <div className=" flex-auto grid flex-grow">
-       <div className="mb-4 mr-4 ">
+       <div className="mb-4  ">
           <label htmlFor="OrganizationName" className="block font-medium mb-2 text-xs sm:text-sm=true ">Organization Name</label>
-          <input
+          <TEInput
+             tabIndex={1}
             type="text"
             id="organization"
             value={organization}
             onChange={handleOrganizationChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div> </div>
         <div className="mb-4 mr-4">
           <label htmlFor="email" className="block font-medium mb-2 text-xs sm:text-sm=true ">Email</label>
-          <input
+          <TEInput
+             tabIndex={2}
             type="email"
             id="email"
             value={email}
             onChange={handleEmailChange}
             className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         <div className="mb-4 mr-4">
           <label htmlFor="contactno" className="block font-medium mb-2 text-xs sm:text-sm=true">Contact No</label>
-          <input
+          <TEInput
+             tabIndex={3}
             type="Number"
             id="contact"
             value={contact}
             onChange={handleContactChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div> 
         <div className="mb-4 mr-4 ">
           <label htmlFor="logo" className="block font-medium mb-2 text-xs sm:text-sm=true">Logo</label>
-          <input
+          <TEInput
+           tabIndex={4}
             type="file"
             id="logo"
             value={logo}
             onChange={handleLogoChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         {/* </div> */}
@@ -175,55 +188,70 @@ const Configuration = () => {
 
         <div className="mb-4 mr-4">
           <label htmlFor="address" className="block font-medium mb-2 text-xs sm:text-sm=true">Address</label>
-          <input
+          <TEInput
+           tabIndex={5}
             type="text"
             id="address"
             value={address}
             onChange={handleAddressChange}
             className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         <div className="mb-4 mr-4">
           <label htmlFor="gstno" className="block font-medium mb-2 text-xs sm:text-sm=true">GST No.</label>
-          <input
+          <TEInput
+           tabIndex={6}
             type="number"
             id="gst"
             value={gst}
             onChange={handleGSTChange}
             className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         <div className="mb-4 mr-4">
           <label htmlFor="tin" className="block font-medium mb-2 text-xs sm:text-sm=true">TIN</label>
-          <input
+          <TEInput
+           tabIndex={7}
             type="text"
             id="tin"
             value={tin}
             onChange={handleTINChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
         <div className="mb-4 mr-4 ">
           <label htmlFor="description" className="block font-medium mb-2 ">Description</label>
-          <input
+          <TEInput
+           tabIndex={8}
             type="text"
             id="description"
             value={description}
             onChange={handleDescriptionChange}
             className="px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
         </div>
        
         {/* </div> */}
         <div className="mb-4 mr-2 ">
           <label  htmlFor="ass"  className="block font-medium mb-2 ">ASS</label>
-          <input
+          <TEInput
+           tabIndex={9}
             type="text"
             id="ass"
             value={ass}
           
             onChange={handleASSChange}
             className=" px-4 py-2 rounded-lg border border-gray-300 focus:outline-none "
+            autoComplete="none"
+            required
           />
          
         </div> </div>
