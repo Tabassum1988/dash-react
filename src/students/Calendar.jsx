@@ -1,3 +1,11 @@
+import Fullcalendar from '@fullcalendar/react';
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import interactionPlugin from "@fullcalendar/interaction";
+
+
+
+
 import React, { useState ,useEffect} from "react";
 import Sidebar from "../partials/Sidebar.jsx"
 import Header from "../partials/Header.jsx"
@@ -92,8 +100,8 @@ setToggle(id)
           Manage Calendar
         </button></div>  */}
         <ul className="flex ">
-          <li className="flex-fill  bg-blue-400 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4  " onClick={()=>updateToggle(1)}>Manage Calendar</li> 
-          <li className="flex-fill  bg-blue-400 hover:bg-blue-600 text-xs sm:text-sm=true text-black font-semibold py-2 sm:px-4 pace-x-5" onClick={()=>updateToggle(2)}>Calendar</li>
+          <li className="flex-fill  text-blue-500 hover:bg-blue-300 text-xxl sm:text-sm=true font-semibold py-2 sm:px-4  " onClick={()=>updateToggle(1)}>Manage Calendar</li> <br /><br />
+          <li className="flex-fill text-blue-500 hover:bg-blue-300 text-xxl sm:text-sm=true font-semibold py-2 sm:px-4 pace-x-5" onClick={()=>updateToggle(2)}>Calendar</li>
         </ul>
         </div>
                    <br />
@@ -227,12 +235,22 @@ setToggle(id)
  <div className={toggle === 2 ? " show-content ": "content"}>
   
      
-  <LocalizationProvider dateAdapter={AdapterDayjs}> 
+  {/* <LocalizationProvider dateAdapter={AdapterDayjs}> 
       <StaticDatePicker orientation="landscape" /> 
-    </LocalizationProvider>   
-
-
-
+    </LocalizationProvider>    */}
+<div className='w-full mb-0 px-2 md:px-4 py-3 max-w-full sm-auto  justify-between  text-neutral-600 shadow-lg hover:text-neutral-700 focus:text-neutral-700 dark:bg-neutral-600 dark:text-neutral-200 md:flex-wrap md:justify-start'>
+<Fullcalendar
+plugins={[dayGridPlugin,timeGridPlugin,interactionPlugin]}
+initialview ={'dayGridMonth'}
+headerToolbar={{
+  start: "today prev next",
+  center: "title",
+  end:"dayGridMonth,timeGridWeek,timeGridDay",
+}}
+height={"80vh"}
+ dafault={"true"}
+/>
+</div>
 </div>   
     </div>  
     </div></div>

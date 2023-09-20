@@ -2,7 +2,7 @@
   "homepage": "https://Tabassum1988.github.io/DashText",
   "name": "asyncron-ed-pro",
   "version": "0.0.1",
-  "private": "true",
+  "private": "false",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
@@ -13,6 +13,10 @@
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
+    "@fullcalendar/daygrid": "^6.1.8",
+    "@fullcalendar/interaction": "^6.1.8",
+    "@fullcalendar/react": "^6.1.8",
+    "@fullcalendar/timegrid": "^6.1.8",
     "@mui/material": "^5.14.8",
     "@mui/x-date-pickers": "^6.13.0",
     "@tailwindcss/forms": "^0.5.3",
